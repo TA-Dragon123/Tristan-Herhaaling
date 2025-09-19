@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION["gebruikernr"] = 0;
 $_SESSION["gebruiker"] = "";
 $_SESSION["wachtwoord"] = "";
 if (isset($_POST["naam"])) $_SESSION["gebruiker"] = $_POST["naam"];
@@ -19,17 +20,19 @@ include "connect.php";
 <body>
     <?php
     if (isset($_POST["knop"])) {
-        $sql = "SELECT wachtwoord, naam, Klas FROM tblgebruiker WHERE naam ='".$_POST["naam"]."' and wachtwoord  ='".$_POST['wachtwoord']."'";
+        $sql = "SELECT wachtwoord, naam, Klas , nummer FROM tblgebruiker WHERE naam ='".$_POST["naam"]."' and wachtwoord  ='".$_POST['wachtwoord']."'";
         $resultaat = $mysqli->query($sql);
         $rowAantal = $resultaat->num_rows;
         if ($rowAantal == 1) {
             $rij = $resultaat->fetch_assoc();
+            $_SESSION["gebruikernr"] = $rij["nummer"];
             if ($rij["Klas"]  == "LKR") {
                 $_SESSION["leerkracht"] = "ja";
                 header ('Location: Leerkracht.php');
                 exit;
             } else if ($rij["Klas"]  == "6AD") {
                 $_SESSION["leerkracht"] = "nee";
+
                 header ('Location: Leerling.php');
                 exit;
             } else {

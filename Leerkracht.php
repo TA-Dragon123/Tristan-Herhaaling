@@ -13,6 +13,7 @@
 <body>
     <?php
     session_start();
+    include "connect.php";
     ?>
     <style>
         body{
@@ -30,6 +31,7 @@
         border-radius: 10px;
         width: 90%;
         padding: 80px;
+        color: #000;
         
         }
     </style>
@@ -42,7 +44,22 @@
             leerkracht op zandpoort";
             ?></h1>
     <p> <a href='Loguit.php'>Log uit</a>.</p>
-    <img src="logo-zandpoort.png" alt="boy" class="borderrr" class="w3-image" width="400" height="600">
+    <div class="borderrr">
+    <?php
+    $sql = "SELECT * FROM tblgebruiker WHERE klas =  '6AD' ";
+     $resultaat = $mysqli->query($sql);
+      
+      echo "<table>
+       <tr><td><h4>Jouw klas</h4></td><tr>
+                 <tr><td><strong>naam</strong></td><td><strong> voornaam </strong></td></tr>";
+        while ($row = $resultaat->fetch_assoc()) {
+            echo "<tr><td>". $row['naam'] ."</td><td>".($row['voornaam'])."</td>
+            </tr>";
+        }
+        echo "</table>";
+        ?>
+    <!-- <img src="logo-zandpoort.png" alt="boy"  class="w3-image" width="400" height="600"> -->
+    </div>
   </header>
   <img src="Busleyden_Atheneum_Logo.png" alt="" class="BAfoto"> >
 </body>

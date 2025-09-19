@@ -11,6 +11,7 @@
 <body>
   <?php
     session_start();
+    include "connect.php";
     ?>
     <style>
         body{
@@ -28,8 +29,11 @@
         border-radius: 10px;
         width: 90%;
         padding: 80px;
+        color: #000;
         
         }
+        
+       
     </style>
     <!-- Page Content -->
 <div class="w3-padding-large" id="main">
@@ -40,7 +44,22 @@
             Leerling op zandpoort";
             ?></h1>
     <p> <a href='Loguit.php'>Log uit</a>.</p>
-    <img src="logo-zandpoort.png" alt="boy" class="borderrr" class="w3-image" width="400" height="600">
+    <div class="borderrr">
+    <?php
+    $sql = "SELECT leerlingnummer, vaknaam, SUM(score)/SUM(maximum) * 100 as resultaat FROM tblpunt WHERE leerlingnummer = '".$_SESSION["gebruikernr"]."' GROUP BY leerlingnummer, vaknaam ";
+     $resultaat = $mysqli->query($sql);
+      
+      echo "<table>
+       <tr><td><h4>Jouw punten</h4></td><tr>
+                 <tr><td><strong>vak</strong></td><td><strong> punt </strong></td></tr>";
+        while ($row = $resultaat->fetch_assoc()) {
+            echo "<tr><td>". $row['vaknaam'] ."</td><td>".intval($row['resultaat'])."%</td>
+            </tr>";
+        }
+        echo "</table>";
+        ?>
+    <!-- <img src="logo-zandpoort.png" alt="boy"  class="w3-image" width="400" height="600"> -->
+    </div>
   </header>
   <img src="Busleyden_Atheneum_Logo.png" alt="" class="BAfoto"> >
 </body>

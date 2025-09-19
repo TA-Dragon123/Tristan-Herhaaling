@@ -29,7 +29,8 @@ session_start();
             <br>
             Gebruikersnaam: <input type="text" name="naam"> <br><br>
             Wachtwoord: <input type="text" name="wachtwoord"> <br><br>
-            <input type="submit" name="knop" value="Login"> 
+            <input type="submit" name="knop" value="Login">
+            </tr> 
             </form>';
     ?></h1>
    
