@@ -1,3 +1,10 @@
+<?php
+ session_start();
+if ($_SESSION["login"] != true) {
+    header('Location: index.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +17,7 @@
 </head>
 <body>
   <?php
-    session_start();
+   
     include "connect.php";
     ?>
     <style>
@@ -35,9 +42,9 @@
         
        
     </style>
-    <!-- Page Content -->
+
 <div class="w3-padding-large" id="main">
-  <!-- Header/Home -->
+  
   <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
     <h1 class="w3-jumbo"><span class="w3-hide-small">I'm </span><?php
     echo "".$_SESSION["gebruiker"]."<br>
@@ -46,8 +53,10 @@
     <p> <a href='Loguit.php'>Log uit</a>.</p>
     <div class="borderrr">
     <?php
-    $sql = "SELECT leerlingnummer, vaknaam, SUM(score)/SUM(maximum) * 100 as resultaat FROM tblpunt WHERE leerlingnummer = '".$_SESSION["gebruikernr"]."' GROUP BY leerlingnummer, vaknaam ";
-     $resultaat = $mysqli->query($sql);
+$sql = "SELECT leerlingnummer, vaknaam, score, maximum, (score / maximum) * 100 as resultaat 
+FROM tblpunt 
+WHERE leerlingnummer = '".$_SESSION["gebruikernr"]."'";     
+$resultaat = $mysqli->query($sql);
       
       echo "<table>
        <tr><td><h4>Jouw punten</h4></td><tr>

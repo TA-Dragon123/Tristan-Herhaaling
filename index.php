@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION["login"] = false;
 ?>
 
 <!DOCTYPE html>
@@ -20,9 +21,9 @@ session_start();
         color: #ffffffff;
         }    
     </style>
-    <!-- Page Content -->
+    
 <div class="w3-padding-large" id="main">
-  <!-- Header/Home -->
+  
   <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
     <h1 class="w3-jumbo"><span class="w3-hide-small">Login</span><?php
     echo '  <form method="post" action="controle.php">

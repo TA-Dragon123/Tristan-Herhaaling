@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION["login"] = false;
 $_SESSION["gebruikernr"] = 0;
 $_SESSION["gebruiker"] = "";
 $_SESSION["wachtwoord"] = "";
@@ -28,10 +29,13 @@ include "connect.php";
             $_SESSION["gebruikernr"] = $rij["nummer"];
             if ($rij["Klas"]  == "LKR") {
                 $_SESSION["leerkracht"] = "ja";
+                $_SESSION["login"] = true;
+                $_SESSION["LKRNR"] = $rij["nummer"];
                 header ('Location: Leerkracht.php');
                 exit;
             } else if ($rij["Klas"]  == "6AD") {
                 $_SESSION["leerkracht"] = "nee";
+                $_SESSION["login"] = true;
 
                 header ('Location: Leerling.php');
                 exit;
