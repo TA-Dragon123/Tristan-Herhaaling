@@ -27,6 +27,6 @@ if (isset($_POST['leerlingnummer'], $_POST['vaknaam'], $_POST['score'], $_POST['
     echo "Vul alle velden in.";
 }
 
-header("Location: LeerKracht.php");
+header("Location: Leerkracht.php");
 exit();
 ?>
